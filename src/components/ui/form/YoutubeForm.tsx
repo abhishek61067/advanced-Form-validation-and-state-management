@@ -31,6 +31,7 @@ const YoutubeForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
+    // default values
     defaultValues: {
       username: "codeek0",
       email: "",
