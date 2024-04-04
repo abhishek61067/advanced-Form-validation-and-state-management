@@ -13,7 +13,7 @@ import {
   h1ClassName,
 } from "@/constant/ui-constant";
 
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 let renderCount = 0;
 
@@ -29,6 +29,7 @@ type FormValues = {
   };
   // array
   phoneNumbers: string[];
+  phNumbers: { number: string }[];
 };
 const YoutubeForm = () => {
   renderCount++;
@@ -52,9 +53,16 @@ const YoutubeForm = () => {
               github: "codeek0",
             },
             phoneNumbers: ["12", "23"],
+            phNumbers: [{ number: "" }],
           };
         });
     },
+  });
+
+  // useFieldArray
+  const { fields, append, remove } = useFieldArray({
+    name: "phNumbers",
+    control,
   });
 
   //   function to handle submit
@@ -169,6 +177,36 @@ const YoutubeForm = () => {
             className={InputClassName}
             {...register("phoneNumbers.1")}
           />
+          <label className={LabelClassName}>List of phone numbers</label>
+          {fields.map((field, index) => {
+            return (
+              <>
+                <input
+                  key={index}
+                  type="text"
+                  {...register(`phNumbers.${index}.number`)}
+                  className={InputClassName}
+                />
+                {index > 0 && (
+                  <Button
+                    onClick={() => {
+                      remove(index);
+                    }}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </>
+            );
+          })}
+          <Button
+            className={buttonClassName}
+            onClick={() => {
+              append({ number: "" });
+            }}
+          >
+            Add number to list
+          </Button>
 
           <Button className={buttonClassName}>Submit</Button>
         </div>
