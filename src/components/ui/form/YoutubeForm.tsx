@@ -14,13 +14,17 @@ import {
 
 import { useForm } from "react-hook-form";
 
+let renderCount = 0;
+
 const YoutubeForm = () => {
+  renderCount++;
   const { register, control } = useForm();
 
   return (
     <div className={bodyClassName}>
       <form action="" className={cn("grid justify-center", centerVertically)}>
         <h1 className={h1ClassName}>Form State Management and Validation</h1>
+        <p className="text-white/50 text-xs">Render count: {renderCount / 2}</p>
         <Section />
         <div className="grid gap-2">
           <label htmlFor="username" className={LabelClassName}>
