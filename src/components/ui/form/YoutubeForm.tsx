@@ -1,5 +1,7 @@
+import { cn } from "@/lib/utils";
 import { Button } from "../button";
 import Section from "../Section";
+import { DevTool } from "@hookform/devtools";
 
 import {
   InputClassName,
@@ -9,14 +11,15 @@ import {
   centerVertically,
   h1ClassName,
 } from "@/constant/ui-constant";
+
 import { useForm } from "react-hook-form";
 
 const YoutubeForm = () => {
-  const { register } = useForm();
+  const { register, control } = useForm();
 
   return (
     <div className={bodyClassName}>
-      <form action="" className={`grid justify-center ${centerVertically}`}>
+      <form action="" className={cn("grid justify-center", centerVertically)}>
         <h1 className={h1ClassName}>Form State Management and Validation</h1>
         <Section />
         <div className="grid gap-2">
@@ -43,13 +46,14 @@ const YoutubeForm = () => {
           </label>
           <input
             type="text"
-            name="channel"
             id="channel"
             className={InputClassName}
+            {...register("channel")}
           />
           <Button className={buttonClassName}>Submit</Button>
         </div>
       </form>
+      <DevTool control={control} /> {/* set up the dev tool */}
     </div>
   );
 };
