@@ -38,7 +38,7 @@ const YoutubeForm = () => {
         .then((data) => {
           return {
             username: data.name,
-            email: "",
+            email: data.email,
             channel: "",
           };
         });
