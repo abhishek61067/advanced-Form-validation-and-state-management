@@ -4,13 +4,14 @@ import Section from "../Section";
 import {
   InputClassName,
   LabelClassName,
+  bodyClassName,
   buttonClassName,
   h1ClassName,
 } from "@/constant/ui-constant";
 
 const YoutubeForm = () => {
   return (
-    <div>
+    <div className={bodyClassName}>
       <h1 className={h1ClassName}>Form State Management and Validation</h1>
       <Section />
       <form action="" className="grid justify-center">
