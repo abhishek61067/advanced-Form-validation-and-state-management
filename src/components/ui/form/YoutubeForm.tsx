@@ -22,6 +22,13 @@ type FormValues = {
   username: string;
   email: string;
   channel: string;
+  // nested object
+  social: {
+    linkedin: string;
+    github: string;
+  };
+  // array
+  phoneNumbers: string[];
 };
 const YoutubeForm = () => {
   renderCount++;
@@ -37,9 +44,14 @@ const YoutubeForm = () => {
         .then((res) => res.json())
         .then((data) => {
           return {
-            username: data.name,
+            username: "codeek",
             email: data.email,
-            channel: "",
+            channel: data.company.name,
+            social: {
+              linkedin: "codeek0",
+              github: "codeek0",
+            },
+            phoneNumbers: ["12", "23"],
           };
         });
     },
@@ -120,6 +132,43 @@ const YoutubeForm = () => {
             {...register("channel")}
           />
           <p className={errorClassName}>{errors.channel?.message}</p>
+          {/* social medias */}
+          <label htmlFor="linkedin" className={LabelClassName}>
+            Linkedin
+          </label>
+          <input
+            type="text"
+            id="linkedin"
+            className={InputClassName}
+            {...register("social.linkedin")}
+          />
+          <label htmlFor="Github" className={LabelClassName}>
+            Github
+          </label>
+          <input
+            type="text"
+            id="Github"
+            className={InputClassName}
+            {...register("social.github")}
+          />
+          <label htmlFor="primaryPhoneNumber" className={LabelClassName}>
+            Primary Phone Number
+          </label>
+          <input
+            type="text"
+            id="primaryPhoneNumber"
+            className={InputClassName}
+            {...register("phoneNumbers.0")}
+          />
+          <label htmlFor="secondaryPhoneNumber" className={LabelClassName}>
+            Secondary Phone Number
+          </label>
+          <input
+            type="text"
+            id="secondaryPhoneNumber"
+            className={InputClassName}
+            {...register("phoneNumbers.1")}
+          />
 
           <Button className={buttonClassName}>Submit</Button>
         </div>
