@@ -37,6 +37,7 @@ const YoutubeForm = () => {
         onSubmit={handleSubmit(submitHandler)}
         action=""
         className={cn("grid justify-center", centerVertically)}
+        noValidate
       >
         <h1 className={h1ClassName}>Form State Management and Validation</h1>
         <p className="text-white/50 text-xs">Render count: {renderCount / 2}</p>
@@ -49,7 +50,12 @@ const YoutubeForm = () => {
             type="text"
             id="username"
             className={InputClassName}
-            {...register("username")}
+            {...register("username", {
+              required: {
+                value: true,
+                message: "username required",
+              },
+            })}
           />
           <label htmlFor="email" className={LabelClassName}>
             Email
@@ -58,7 +64,12 @@ const YoutubeForm = () => {
             type="text"
             id="email"
             className={InputClassName}
-            {...register("email")}
+            {...register("email", {
+              pattern: {
+                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                message: "invaild email format",
+              },
+            })}
           />
           <label htmlFor="channel" className={LabelClassName}>
             Channel
