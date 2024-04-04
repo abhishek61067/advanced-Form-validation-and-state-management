@@ -72,6 +72,7 @@ const YoutubeForm = () => {
             id="email"
             className={InputClassName}
             {...register("email", {
+              // html native validations
               required: {
                 value: true,
                 message: "email required",
@@ -79,6 +80,18 @@ const YoutubeForm = () => {
               pattern: {
                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                 message: "invaild email format",
+              },
+              // custom validations
+              validate: {
+                notAdmin: (fieldValue) => {
+                  return fieldValue === "admin@example.com"
+                    ? "This email is reserved only for admin"
+                    : true;
+                },
+                notBadDomain: (fieldValue) =>
+                  fieldValue.endsWith("baddomain.com")
+                    ? "Enter email other than blacklisted domains"
+                    : true,
               },
             })}
           />
