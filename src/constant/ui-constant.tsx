@@ -5,3 +5,4 @@ export const buttonClassName =
   "bg-neutral-800 hover:bg-neutral-700 shadow-md shadow-black/30";
 export const bodyClassName = "bg-black/90 h-[100vh]";
 export const centerVertically = "centerVertically";
+export const errorClassName = "text-red-400 text-sm";

@@ -9,6 +9,7 @@ import {
   bodyClassName,
   buttonClassName,
   centerVertically,
+  errorClassName,
   h1ClassName,
 } from "@/constant/ui-constant";
 
@@ -24,7 +25,12 @@ type FormValues = {
 };
 const YoutubeForm = () => {
   renderCount++;
-  const { register, control, handleSubmit } = useForm<FormValues>();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
   //   function to handle submit
   const submitHandler = (data: FormValues) => {
@@ -57,6 +63,7 @@ const YoutubeForm = () => {
               },
             })}
           />
+          <p className={errorClassName}>{errors.username?.message}</p>
           <label htmlFor="email" className={LabelClassName}>
             Email
           </label>
@@ -65,12 +72,18 @@ const YoutubeForm = () => {
             id="email"
             className={InputClassName}
             {...register("email", {
+              required: {
+                value: true,
+                message: "email required",
+              },
               pattern: {
                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                 message: "invaild email format",
               },
             })}
           />
+          <p className={errorClassName}>{errors.email?.message}</p>
+
           <label htmlFor="channel" className={LabelClassName}>
             Channel
           </label>
@@ -80,6 +93,8 @@ const YoutubeForm = () => {
             className={InputClassName}
             {...register("channel")}
           />
+          <p className={errorClassName}>{errors.channel?.message}</p>
+
           <Button className={buttonClassName}>Submit</Button>
         </div>
       </form>
