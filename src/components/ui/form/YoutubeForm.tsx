@@ -30,7 +30,13 @@ const YoutubeForm = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<FormValues>({
+    defaultValues: {
+      username: "codeek0",
+      email: "",
+      channel: "",
+    },
+  });
 
   //   function to handle submit
   const submitHandler = (data: FormValues) => {
