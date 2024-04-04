@@ -32,10 +32,16 @@ const YoutubeForm = () => {
     formState: { errors },
   } = useForm<FormValues>({
     // default values
-    defaultValues: {
-      username: "codeek0",
-      email: "",
-      channel: "",
+    defaultValues: async () => {
+      return fetch("https://jsonplaceholder.typicode.com/users/1")
+        .then((res) => res.json())
+        .then((data) => {
+          return {
+            username: data.name,
+            email: "",
+            channel: "",
+          };
+        });
     },
   });
 
