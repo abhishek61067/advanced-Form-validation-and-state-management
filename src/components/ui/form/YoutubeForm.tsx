@@ -40,7 +40,17 @@ const YoutubeForm = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors, dirtyFields, touchedFields, isDirty, isValid },
+    formState: {
+      errors,
+      dirtyFields,
+      touchedFields,
+      isDirty,
+      isValid,
+      isSubmitting,
+      isSubmitted,
+      isSubmitSuccessful,
+      submitCount,
+    },
     watch,
     getValues,
     setValue,
@@ -66,7 +76,16 @@ const YoutubeForm = () => {
         });
     },
   });
-  console.log({ touchedFields, dirtyFields, isDirty, isValid });
+  console.log({
+    // touchedFields,
+    // dirtyFields,
+    // isDirty,
+    // isValid,
+    isSubmitting,
+    isSubmitted,
+    isSubmitSuccessful,
+    submitCount,
+  });
 
   const username = watch();
   const formValues = getValues();
@@ -271,9 +290,7 @@ const YoutubeForm = () => {
             {...register("dob", { valueAsDate: true })}
           />
 
-          <Button className={buttonClassName} disabled={!isDirty || !isValid}>
-            Submit
-          </Button>
+          <Button className={buttonClassName}>Submit</Button>
           <Button
             type="button"
             onClick={handleGetValues}
