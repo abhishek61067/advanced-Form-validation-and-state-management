@@ -14,6 +14,7 @@ import {
 } from "@/constant/ui-constant";
 
 import { useFieldArray, useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 let renderCount = 0;
 
@@ -77,6 +78,16 @@ const YoutubeForm = () => {
     console.log("form data: ", data);
   };
 
+  // sideeffect for watch change
+  useEffect(() => {
+    const subscription = watch((updatedValue) => {
+      console.log("updated value: ", updatedValue);
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [username]);
+
   return (
     <div className={bodyClassName}>
       <form
@@ -87,7 +98,9 @@ const YoutubeForm = () => {
       >
         <h1 className={h1ClassName}>Form State Management and Validation</h1>
         <p className="text-white/50 text-xs">Render count: {renderCount / 2}</p>
-        <p className="text-white">Username: {JSON.stringify(username)}</p>
+        {/* <p className="text-white w-[400px] overflow-scroll">
+          Username: {JSON.stringify(username)}
+        </p> */}
         <Section />
         <div className="grid gap-2">
           <label htmlFor="username" className={LabelClassName}>
