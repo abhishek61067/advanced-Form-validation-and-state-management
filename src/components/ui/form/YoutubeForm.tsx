@@ -51,7 +51,7 @@ const YoutubeForm = () => {
         .then((res) => res.json())
         .then((data) => {
           return {
-            username: "codeek",
+            username: "",
             email: data.email,
             channel: data.company.name,
             social: {
@@ -176,7 +176,9 @@ const YoutubeForm = () => {
             type="text"
             id="channel"
             className={InputClassName}
-            {...register("channel")}
+            {...register("channel", {
+              disabled: watch("username") === "",
+            })}
           />
           <p className={errorClassName}>{errors.channel?.message}</p>
           {/* social medias */}
