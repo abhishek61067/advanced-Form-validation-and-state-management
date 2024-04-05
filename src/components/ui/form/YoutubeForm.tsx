@@ -13,7 +13,7 @@ import {
   h1ClassName,
 } from "@/constant/ui-constant";
 
-import { useFieldArray, useForm } from "react-hook-form";
+import { FieldErrors, useFieldArray, useForm } from "react-hook-form";
 import { useEffect } from "react";
 
 let renderCount = 0;
@@ -81,6 +81,10 @@ const YoutubeForm = () => {
   const submitHandler = (data: FormValues) => {
     console.log("form data: ", data);
   };
+  //   function to handle error
+  const errorHandler = (error: FieldErrors<FormValues>) => {
+    console.log("form error: ", error);
+  };
 
   // sideeffect for watch change
   useEffect(() => {
@@ -109,7 +113,7 @@ const YoutubeForm = () => {
   return (
     <div className={bodyClassName}>
       <form
-        onSubmit={handleSubmit(submitHandler)}
+        onSubmit={handleSubmit(submitHandler, errorHandler)}
         action=""
         className={cn("grid justify-center", centerVertically)}
         noValidate
