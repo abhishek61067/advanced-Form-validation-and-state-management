@@ -43,6 +43,7 @@ const YoutubeForm = () => {
     formState: { errors },
     watch,
     getValues,
+    setValue,
   } = useForm<FormValues>({
     // default values
     defaultValues: async () => {
@@ -93,6 +94,11 @@ const YoutubeForm = () => {
   // getvalues handler
   const handleGetValues = () => {
     console.log("get values: ", formValues);
+  };
+
+  // setValue handler
+  const handleSetValue = () => {
+    setValue("username", "ab");
   };
 
   return (
@@ -261,6 +267,13 @@ const YoutubeForm = () => {
             className={buttonClassName}
           >
             Get values
+          </Button>
+          <Button
+            type="button"
+            onClick={handleSetValue}
+            className={buttonClassName}
+          >
+            set values
           </Button>
         </div>
       </form>
