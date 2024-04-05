@@ -54,6 +54,7 @@ const YoutubeForm = () => {
     watch,
     getValues,
     setValue,
+    reset,
   } = useForm<FormValues>({
     // default values
     defaultValues: async () => {
@@ -77,10 +78,10 @@ const YoutubeForm = () => {
     },
   });
   console.log({
-    // touchedFields,
-    // dirtyFields,
-    // isDirty,
-    // isValid,
+    touchedFields,
+    dirtyFields,
+    isDirty,
+    isValid,
     isSubmitting,
     isSubmitted,
     isSubmitSuccessful,
@@ -104,6 +105,15 @@ const YoutubeForm = () => {
   const errorHandler = (error: FieldErrors<FormValues>) => {
     console.log("form error: ", error);
   };
+  //   function to handle reset
+  const handleReset = () => {
+    reset();
+  };
+  // sideeffect of isSubmitSuccessful
+  useEffect(() => {
+    reset();
+    console.log("isSubmitSuccessful: ", isSubmitSuccessful);
+  }, [isSubmitSuccessful, reset]);
 
   // sideeffect for watch change
   useEffect(() => {
@@ -187,6 +197,15 @@ const YoutubeForm = () => {
                   fieldValue.endsWith("baddomain.com")
                     ? "Enter email other than blacklisted domains"
                     : true,
+                emailAlreadyExists: async (fieldValue) => {
+                  return fetch(
+                    `https://jsonplaceholder.typicode.com/users?email=${fieldValue}`
+                  )
+                    .then((res) => res.json())
+                    .then((data) =>
+                      data.length > 0 ? "Email already exists" : true
+                    );
+                },
               },
             })}
           />
@@ -303,7 +322,14 @@ const YoutubeForm = () => {
             onClick={handleSetValue}
             className={buttonClassName}
           >
-            set values
+            Set values
+          </Button>
+          <Button
+            type="button"
+            onClick={handleReset}
+            className={buttonClassName}
+          >
+            Reset
           </Button>
         </div>
       </form>
