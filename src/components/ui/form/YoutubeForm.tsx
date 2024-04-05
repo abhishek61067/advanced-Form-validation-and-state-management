@@ -42,6 +42,7 @@ const YoutubeForm = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    getValues,
   } = useForm<FormValues>({
     // default values
     defaultValues: async () => {
@@ -66,6 +67,7 @@ const YoutubeForm = () => {
   });
 
   const username = watch();
+  const formValues = getValues();
 
   // useFieldArray
   const { fields, append, remove } = useFieldArray({
@@ -87,6 +89,11 @@ const YoutubeForm = () => {
       subscription.unsubscribe();
     };
   }, [username]);
+
+  // getvalues handler
+  const handleGetValues = () => {
+    console.log("get values: ", formValues);
+  };
 
   return (
     <div className={bodyClassName}>
@@ -248,6 +255,13 @@ const YoutubeForm = () => {
           />
 
           <Button className={buttonClassName}>Submit</Button>
+          <Button
+            type="button"
+            onClick={handleGetValues}
+            className={buttonClassName}
+          >
+            Get values
+          </Button>
         </div>
       </form>
       <DevTool control={control} /> {/* set up the dev tool */}
