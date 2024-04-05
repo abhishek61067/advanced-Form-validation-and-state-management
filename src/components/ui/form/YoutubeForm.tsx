@@ -202,9 +202,13 @@ const YoutubeForm = () => {
                     `https://jsonplaceholder.typicode.com/users?email=${fieldValue}`
                   )
                     .then((res) => res.json())
-                    .then((data) =>
-                      data.length > 0 ? "Email already exists" : true
-                    );
+                    .then((data) => {
+                      if (data.length > 0) {
+                        return "Email already exists";
+                      } else {
+                        return true;
+                      }
+                    });
                 },
               },
             })}
