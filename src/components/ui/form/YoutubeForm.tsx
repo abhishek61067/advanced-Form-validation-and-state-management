@@ -30,6 +30,8 @@ type FormValues = {
   // array
   phoneNumbers: string[];
   phNumbers: { number: string }[];
+  age: number;
+  dob: Date;
 };
 const YoutubeForm = () => {
   renderCount++;
@@ -38,6 +40,7 @@ const YoutubeForm = () => {
     control,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<FormValues>({
     // default values
     defaultValues: async () => {
@@ -54,10 +57,14 @@ const YoutubeForm = () => {
             },
             phoneNumbers: ["12", "23"],
             phNumbers: [{ number: "" }],
+            age: 0,
+            dob: new Date(),
           };
         });
     },
   });
+
+  const username = watch();
 
   // useFieldArray
   const { fields, append, remove } = useFieldArray({
@@ -80,6 +87,7 @@ const YoutubeForm = () => {
       >
         <h1 className={h1ClassName}>Form State Management and Validation</h1>
         <p className="text-white/50 text-xs">Render count: {renderCount / 2}</p>
+        <p className="text-white">Username: {JSON.stringify(username)}</p>
         <Section />
         <div className="grid gap-2">
           <label htmlFor="username" className={LabelClassName}>
@@ -207,6 +215,24 @@ const YoutubeForm = () => {
           >
             Add number to list
           </Button>
+          <label htmlFor="age" className={LabelClassName}>
+            Age{" "}
+          </label>
+          <input
+            type="number"
+            id="age"
+            className={InputClassName}
+            {...register("age")}
+          />
+          <label htmlFor="dob" className={LabelClassName}>
+            Date of birth{" "}
+          </label>
+          <input
+            type="date"
+            id="dob"
+            className={InputClassName}
+            {...register("dob", { valueAsDate: true })}
+          />
 
           <Button className={buttonClassName}>Submit</Button>
         </div>
