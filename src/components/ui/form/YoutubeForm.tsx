@@ -98,7 +98,11 @@ const YoutubeForm = () => {
 
   // setValue handler
   const handleSetValue = () => {
-    setValue("username", "ab");
+    setValue("username", "ab", {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
   };
 
   return (
