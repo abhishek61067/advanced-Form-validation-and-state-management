@@ -40,7 +40,7 @@ const YoutubeForm = () => {
     register,
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields, touchedFields, isDirty },
     watch,
     getValues,
     setValue,
@@ -66,6 +66,7 @@ const YoutubeForm = () => {
         });
     },
   });
+  console.log({ touchedFields, dirtyFields, isDirty });
 
   const username = watch();
   const formValues = getValues();
@@ -98,7 +99,7 @@ const YoutubeForm = () => {
 
   // setValue handler
   const handleSetValue = () => {
-    setValue("username", "ab", {
+    setValue("email", "ab", {
       shouldDirty: true,
       shouldTouch: true,
       shouldValidate: true,
