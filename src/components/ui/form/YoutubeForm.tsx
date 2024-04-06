@@ -76,6 +76,7 @@ const YoutubeForm = () => {
           };
         });
     },
+    mode: "onChange",
   });
   console.log({
     touchedFields,
